@@ -7,24 +7,33 @@ const client = new OpenAI({
 
 async function analyzeCase(caseText) {
 
-  const prompt = `
-You are a legal assistant.
+const prompt = `
+You are a legal AI assistant.
 
-Given the following legal case text:
+Analyze the following legal case.
 
+Case:
 "${caseText}"
 
-Perform these tasks:
+Tasks:
+1. Summarize the case
+2. Predict relevant IPC sections
+3. Explain reasoning
 
-1. Summarize the case in simple language.
-2. Identify relevant IPC sections.
-3. Explain why those IPC sections apply.
+IMPORTANT RULES:
+- Return ONLY pure JSON
+- Do NOT write any extra sentence
+- Do NOT write "Here is the analysis"
+- Do NOT use markdown
+- Response must start with {
+- Response must end with }
 
-Return response in JSON format:
+Return format:
+
 {
-  "summary": "",
-  "ipc_sections": [],
-  "reasoning": ""
+  "summary": "string",
+  "ipc_sections": ["section1", "section2"],
+  "reasoning": "string"
 }
 `;
 
